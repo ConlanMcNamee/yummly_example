@@ -37,7 +37,7 @@ It will take a few minutes for npm install to finish
 npm install
 npm start
 ```
-So now there should be a virtual server running in our command prompt, if a new page did not open in your browser you can view it at localhost:3000 in your browser of choice.
+So now there should be a virtual server running in our command prompt, if a new page did not open in your browser you can view it by navigating to localhost:3000 in your browser of choice.
 
 #Creating the application
 If you cloned the final product you can test in in your web browser.
