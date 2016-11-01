@@ -23,7 +23,7 @@ It is recommended to start with this example, if you wish to start with the base
 ##Building the application
 Download or clone the basic setup [here](https://github.com/ConlanMcNamee/yummly_example/tree/setup)
 
-If you would like to see the final product it can be found [here](https://github.com/ConlanMcNamee/yummly_exmample/tree/yummly).
+If you would like to see the final product clone from the master repository above.
 
 Using your selected IDE, open the folder containing the basic setup.
 
