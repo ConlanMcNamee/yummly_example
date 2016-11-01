@@ -51,8 +51,8 @@ Create app/rxjs-operators.ts
 Create app/yummly-get.service.ts
 ```
 The Windows command is fairly straight forward, it creates the appropriate files.
-##Writing and updating files
-- Open app/rxjs-operators.ts and paste this code inside of it.
+#Writing and updating files
+## Open app/rxjs-operators.ts and paste this code inside of it.
 ```
 // Statics
 import 'rxjs/add/observable/throw';
@@ -67,7 +67,7 @@ import 'rxjs/add/operator/toPromise';
 ```
 This code makes it easier on you when interacting with an API in angular2
 
-- Open app/app.module.ts and either add the additional code or paste this code in place of the current code.
+## Open app/app.module.ts and either add the additional code or paste this code in place of the current code.
 ```
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -90,7 +90,7 @@ export class AppModule { }
 ```
 The differences are the import of the FormsModule from the angular core and the HttpModule and JsonpModule from angular/http. In doing so, make sure they are also declared in your imports array.
 
-- Open the newly created app/yummly-get.service.ts.
+## Open the newly created app/yummly-get.service.ts.
 At the top import all the necessary modules you will need. It will look like this
 ```
 import { Injectable }     from '@angular/core';
@@ -105,7 +105,7 @@ Start by telling angular that this is an injectable service. It should look like
 @Injectable
 ```
 
-Now we can write the service class, and initialize it like so
+## Write the service class, and initialize it like so
 ```
 export class YummlyGetSerivce {
 
@@ -113,18 +113,18 @@ export class YummlyGetSerivce {
 ```
   Inside the YummlyGetSerivce class the steps to making this service will be as such
 
-- Create a private variable that contains the url of the API endpoint
+## Create a private variable that contains the url of the API endpoint
 ```
 private url = 'https://api.yummly.com/v1/api/recipes?_app_id=ca33a09c&_app_key=458d12f8aa1a7682b4f947c7375a93dd&q=';
 ```
   The app id and app key at the end tell the api that we are authorized to makes requests
 
-- Declare an http constructor
+## Declare an http constructor
 ```
 constructor (private http: Http){}
 ```
 
-- Add a method to the YummlyGetService class that retrieves recipes from the endpoint after taking a string argument
+## Add a method to the YummlyGetService class that retrieves recipes from the endpoint after taking a string argument
 ```
 getRecipes(string: String): Observable<Object[]> {
     return this.http.get(this.url + string + '&maxResult=10')
@@ -138,7 +138,7 @@ getRecipes(string: String): Observable<Object[]> {
 
   [Here](https://developer.yummly.com/documentation#Metadata) is more information on all the data sent by the Yummly API
 
-- Add a private method that will handle errors that otherwise might fail silently(not 100% necessary but good practice)
+## Add a private method that will handle errors that otherwise might fail silently(not 100% necessary but good practice)
 
 ```
 private handleError (error: Response | any) {
@@ -156,7 +156,7 @@ private handleError (error: Response | any) {
   }
 ```
 
-- Open the app/app.component.ts file. At the top of the file import these additional components
+## Open the app/app.component.ts file. At the top of the file import these additional components
 ```
 import { OnInit } from '@angular/core';
 import { YummlyGetService } from './yummly-get.service';
@@ -164,7 +164,7 @@ import './rxjs-operators';
 ```
   OnInit lets is populate the page on startup, the yummlyGetService is the service we just created, and ./rxjs-operators is for our api call.
 
-- Next step is to modify the @Component so that we can see our data displayed on the page
+## Modify the @Component so that we can see our data displayed on the page
 ```
 @Component({
   selector: 'my-app',
@@ -195,33 +195,35 @@ Other important steps to note are.
 
 4.  Tell angular that in order for this code to work properly it will need the YummlyGetService in the providers array.
 
-- Modify the AppComponent Class. It will need to called differently than in the base example so we can utilize the OnInit component
+##Now, Modify the AppComponent Class. It will need to called differently than in the base example so we can utilize the OnInit component
 ```
 export class AppComponent implements OnInit {
 
 }
 ```
+
 Inside the AppComponent declare some attributes that will be used in the methods you'll create
 ```
 recipes: Object[];
 ingredients = [];
 excludeString = "";
 ```
-The recipes attribute is where our api call will store matches received from Yummly.
-The ingredients attribute will later be replaced by recipes.ingredients in one of our methods
-And the excludeString will be created by the user as they add ingredients they wish to be excluded from the returned recipes.
+  The recipes attribute is where our api call will store matches received from Yummly.
+  The ingredients attribute will later be replaced by recipes.ingredients in one of our methods
+  And the excludeString will be created by the user as they add ingredients they wish to be excluded from the returned recipes.
 
 This next line assists in our api call
 ```
 mode = 'Observable';
 ```
-Next construct the yummlyGetService so that it can be used
+
+## Construct the yummlyGetService so that it can be used
 ```
 constructor(private yummlyGetService: YummlyGetService) {}
 ```
 
-Finally we create four methods
-1. createExcludeString
+#Create Four Methods inside AppComponent
+## First Method createExcludeString
 ```
 createExcludeString(string: String) {
   let excludes = string.split(',');
@@ -236,7 +238,8 @@ createExcludeString(string: String) {
 }
 ```
 This takes the user input of ingredients they would like excluded, splits it into an array of the choices, and constructs the string based on how Yummly API requires its queries to be made. More information on the format [here](https://developer.yummly.com/documentation#Metadata).
-2. getRecipes
+
+## Second Method getRecipes
 ```
 getRecipes(str: string) {
   //assigns the input string to this.excludeString
@@ -250,20 +253,21 @@ getRecipes(str: string) {
 ```
 This is almost the same as the getRecipes from the yummly-get.service file. The extra code tells angular that the parameter string inside getRecipes should be the same as the excludeString and to use the yummlyGetService.getRecipes method and put the results in the previously created recipes array.
 
-3. formReset
+## Third Method formReset
 ```
 formReset() {
   this.excludeString = "";
 }
 ```
 when the user submits their excluded ingredients, getRecipes is called. At the end of getRecipes this function is used reset the excludeString so that another query can be made
-4. ngOnInit
+
+## Fourth Method ngOnInit
 ```
 ngOnInit() {
   this.getRecipes(this.excludeString);
 }
 ```
-this tells angular that when the app'ication is initially opened run this.getRecipes() so our page will have some recipes to show.
+this tells angular that when the application is initially opened run this.getRecipes() so our page will have some recipes to show.
 
 ##Final yummly-get.service.ts file and app.component.ts file
 This is how the yummly-get.service.ts file should look once completed.
