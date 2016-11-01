@@ -369,3 +369,11 @@ export class AppComponent implements OnInit {
   }
 }
 ```
+
+#Viewing
+Once done the application should still be running in your browser. If not, either type
+```
+npm start
+```
+to start the application again
+Or refresh localhost:3000 in your browser
