@@ -158,6 +158,7 @@ private handleError (error: Response | any) {
     return Observable.throw(errMsg);
   }
 ```
+This is not my own making, it was borrowed from the [Angular.io Documentation](https://angular.io/docs/ts/latest/guide/server-communication.html) under the hero.service.ts file provide in the link.
 
 ## Open the app/app.component.ts file. At the top of the file import these additional components
 ```
