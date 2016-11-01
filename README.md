@@ -16,7 +16,7 @@ and
 ```
 
 * [TypeScript](https://angular.io/docs/ts/latest/quickstart.html) This link includes a fantastic example of how to install and create the bare minimum for a functioning TypeScript application.
-Otherwise in your command line type 
+Otherwise in your command line type
 ```
 npm install -g typescript
 ```
@@ -277,7 +277,7 @@ ngOnInit() {
 ```
 this tells angular that when the application is initially opened run this.getRecipes() so our page will have some recipes to show.
 
-##Final yummly-get.service.ts file and app.component.ts file
+#Final yummly-get.service.ts file and app.component.ts file
 This is how the yummly-get.service.ts file should look once completed.
 ```
 import { Injectable }     from '@angular/core';
