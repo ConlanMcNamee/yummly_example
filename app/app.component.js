@@ -9,15 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var yummly_get_service_1 = require('./yummly-get.service');
+require('./rxjs-operators');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(yummlyGetService) {
+        this.yummlyGetService = yummlyGetService;
+        this.data = 'here is some stuffs';
+        this.mode = 'Observable';
     }
+    AppComponent.prototype.getRecipes = function () {
+        var _this = this;
+        this.yummlyGetService.getRecipes().subscribe(function (recipes) { return _this.recipes = recipes; });
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.getRecipes();
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>Yummly API example!</h1>'
+            template: "\n  <h1>Yummly API example!</h1>\n  <h2>{{data}}</h2>\n  <ul>\n    <li *ngFor=\"let recipe of recipes\">{{recipe}}</li>\n  </ul>\n  ",
+            providers: [yummly_get_service_1.YummlyGetService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [yummly_get_service_1.YummlyGetService])
     ], AppComponent);
     return AppComponent;
 }());
