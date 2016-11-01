@@ -14,20 +14,37 @@ require('./rxjs-operators');
 var AppComponent = (function () {
     function AppComponent(yummlyGetService) {
         this.yummlyGetService = yummlyGetService;
-        this.data = 'here is some stuffs';
+        this.ingredients = [];
+        this.excludeString = "";
         this.mode = 'Observable';
     }
-    AppComponent.prototype.getRecipes = function () {
+    AppComponent.prototype.createExcludeString = function (string) {
+        var excludes = string.split(',');
+        var returnString = "";
+        for (var prop in excludes) {
+            if (excludes[prop] !== '') {
+                var temp = excludes[prop].toLowerCase().trim().replace(' ', '%20');
+                returnString = returnString + '&excludedIngredient[]=' + temp;
+            }
+        }
+        return returnString;
+    };
+    AppComponent.prototype.getRecipes = function (str) {
         var _this = this;
-        this.yummlyGetService.getRecipes().subscribe(function (recipes) { return _this.recipes = recipes; });
+        this.excludeString = str;
+        this.yummlyGetService.getRecipes(this.excludeString).subscribe(function (recipes) { return _this.recipes = recipes; });
+        this.formReset();
+    };
+    AppComponent.prototype.formReset = function () {
+        this.excludeString = "";
     };
     AppComponent.prototype.ngOnInit = function () {
-        this.getRecipes();
+        this.getRecipes(this.excludeString);
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n  <h1>Yummly API example!</h1>\n  <h2>{{data}}</h2>\n  <ul>\n    <li *ngFor=\"let recipe of recipes\">{{recipe}}</li>\n  </ul>\n  ",
+            template: "\n  <h1>Yummly API example!</h1>\n  <div>\n  <h1>Input excluded ingredients below separated by a comma!</h1>\n  <input [(ngModel)]=\"excludeString\">\n  <button (click)=\"getRecipes(createExcludeString(excludeString))\">Submit</button>\n  </div>\n  <ul>\n    <li *ngFor=\"let recipe of recipes\"><h3>{{recipe.recipeName}}</h3>\n      <p>{{recipe.ingredients}}</p>\n    </li>\n  </ul>\n  ",
             providers: [yummly_get_service_1.YummlyGetService]
         }), 
         __metadata('design:paramtypes', [yummly_get_service_1.YummlyGetService])

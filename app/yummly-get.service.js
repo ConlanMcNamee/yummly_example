@@ -14,11 +14,11 @@ var Observable_1 = require('rxjs/Observable');
 var YummlyGetService = (function () {
     function YummlyGetService(http) {
         this.http = http;
-        this.url = 'https://api.yummly.com/v1/api/recipes?_app_id=ca33a09c&_app_key=458d12f8aa1a7682b4f947c7375a93dd&q=&excludedIngredient[]=chicken';
+        this.url = 'https://api.yummly.com/v1/api/recipes?_app_id=ca33a09c&_app_key=458d12f8aa1a7682b4f947c7375a93dd&q=';
     }
-    YummlyGetService.prototype.getRecipes = function () {
-        return this.http.get(this.url)
-            .map(function (res) { return res.json(); })
+    YummlyGetService.prototype.getRecipes = function (string) {
+        return this.http.get(this.url + string + '&maxResult=10')
+            .map(function (res) { return res.json().matches; })
             .catch(this.handleError);
     };
     YummlyGetService.prototype.handleError = function (error) {
