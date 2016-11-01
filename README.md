@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This sample shows how to connect an Angular and typescript app to the Yummly API and return recipes with excluded recipe ingredient's through user input.
+This sample shows how to connect an Angular and typescript app to the Yummly API and returns a list of recipes that do not include the excluded ingredients select by the user.
 
 ##Prerequisites
 To use the Yummly API sample you will need the following:
