@@ -23,13 +23,14 @@ Download or clone the basic setup [here](https://github.com/ConlanMcNamee/yummly
 If you would like to see the final product it can be found [here](https://github.com/ConlanMcNamee/yummly_exmample/tree/yummly).
 
 Using your selected IDE, open the folder containing the basic setup.
-3. In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitor it's changes through the TypeScript compiler watch mode.
+
+In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitor it's changes through the TypeScript compiler watch mode.
 It will take a few minutes for npm install to finish
 ```
 npm install
 npm start
 ```
-So now there should be a virtual server running now in our command prompt, if a new page did not open in your browser you can view it at localhost:3000 in your browser of choice.
+So now there should be a virtual server running in our command prompt, if a new page did not open in your browser you can view it at localhost:3000 in your browser of choice.
 
 #Creating the application
 If you cloned the final product you can test in in your web browser.
@@ -39,7 +40,7 @@ If you cloned the basic setup below are the steps to making this application.
 Open another command prompt without closing the one running our lite-server. You will need need two new files for this application in our app folder.  
 1. rxjs-operators.ts
 2. yummly-get.service.ts
-In a Mac Terminal we can type
+In a Mac Terminal type
 ```
 touch app/rxjs-operators.ts app/yummly-get.service.ts
 ```
@@ -49,7 +50,7 @@ In a Windows Terminal, type
 Create app/rxjs-operators.ts
 Create app/yummly-get.service.ts
 ```
-The Windows command is fairly straight forward, we create the appropriate files.
+The Windows command is fairly straight forward, it creates the appropriate files.
 ##Writing and updating files
 1. Open app/rxjs-operators.ts and paste this code inside of it.
 ```
@@ -64,7 +65,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 ```
-This code makes it easier on you when interacting with an API in angular 2
+This code makes it easier on you when interacting with an API in angular2
 
 2. Open app/app.module.ts and either add the additional code or paste this code in place of the current code.
 ```
