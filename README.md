@@ -35,7 +35,7 @@ So now there should be a virtual server running in our command prompt, if a new 
 #Creating the application
 If you cloned the final product you can test in in your web browser.
 
-If you cloned the basic setup below are the steps to making this application.
+If you cloned the basic setup below are the steps for making this application.
 ## Adding files
 Open another command prompt without closing the one running our lite-server. You will need need two new files for this application in our app folder.  
 1. rxjs-operators.ts
