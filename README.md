@@ -18,10 +18,11 @@ and
 * [Yummly](https://developer.yummly.com/#the-api)If you want to make calls to the Yummly API on your own you will need your own account [here](https://developer.yummly.com/#the-api), otherwise the url provided in this example will allow proper responses from the Yummly API.
 
 ##Building the application
-1. Download or clone the basic setup [here](https://github.com/ConlanMcNamee/yummly_example/tree/setup)
+Download or clone the basic setup [here](https://github.com/ConlanMcNamee/yummly_example/tree/setup)
 
 If you would like to see the final product it can be found [here](https://github.com/ConlanMcNamee/yummly_exmample/tree/yummly).
-2. Using your selected IDE, open the folder containing the basic setup.
+
+Using your selected IDE, open the folder containing the basic setup.
 3. In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitor it's changes through the TypeScript compiler watch mode.
 It will take a few minutes for npm install to finish
 ```
