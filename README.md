@@ -16,6 +16,10 @@ and
 ```
 
 * [TypeScript](https://angular.io/docs/ts/latest/quickstart.html) This link includes a fantastic example of how to install and create the bare minimum for a functioning TypeScript application.
+Otherwise in your command line type 
+```
+npm install -g typescript
+```
 It is recommended to start with this example, if you wish to start with the base code and not go through the typescript quickstart, the starting code can be cloned from this [example](https://github.com/ConlanMcNamee/yummly_example/tree/setup).
 
 * [Yummly](https://developer.yummly.com/#the-api): If you want to make calls to the Yummly API on your own you will need your own account [here](https://developer.yummly.com/#the-api), otherwise the url provided in this example will allow proper responses from the Yummly API.
