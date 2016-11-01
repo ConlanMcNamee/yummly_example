@@ -18,17 +18,19 @@ and
 * [Yummly](https://developer.yummly.com/#the-api)If you want to make calls to the Yummly API on your own you will need your own account [here](https://developer.yummly.com/#the-api), otherwise the url provided in this example will allow proper responses from the Yummly API.
 
 ##Building the application
-1. Download or clone the basic setup [here](https://github.com/ConlanMcNamee/yummly_example/tree/setup)
+Download or clone the basic setup [here](https://github.com/ConlanMcNamee/yummly_example/tree/setup)
 
-If you would like to see the final product it can be found [here](https://github.com/ConlanMcNamee/yummly_exmample/tree/yummly)
-2. Using your selected IDE, open the folder containing the basic setup.
-3. In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitor it's changes through the TypeScript compiler watch mode.
+If you would like to see the final product it can be found [here](https://github.com/ConlanMcNamee/yummly_exmample/tree/yummly).
+
+Using your selected IDE, open the folder containing the basic setup.
+
+In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitor it's changes through the TypeScript compiler watch mode.
 It will take a few minutes for npm install to finish
 ```
 npm install
 npm start
 ```
-So now there should be a virtual server running now in our command prompt, if a new page did not open in your browser you can view it at localhost:3000 in your browser of choice.
+So now there should be a virtual server running in our command prompt, if a new page did not open in your browser you can view it at localhost:3000 in your browser of choice.
 
 #Creating the application
 If you cloned the final product you can test in in your web browser.
@@ -38,7 +40,7 @@ If you cloned the basic setup below are the steps to making this application.
 Open another command prompt without closing the one running our lite-server. You will need need two new files for this application in our app folder.  
 1. rxjs-operators.ts
 2. yummly-get.service.ts
-In a Mac Terminal we can type
+In a Mac Terminal type
 ```
 touch app/rxjs-operators.ts app/yummly-get.service.ts
 ```
@@ -48,9 +50,9 @@ In a Windows Terminal, type
 Create app/rxjs-operators.ts
 Create app/yummly-get.service.ts
 ```
-The Windows command is fairly straight forward, we create the appropriate files.
-##Writing and updating files
-1. Open app/rxjs-operators.ts and paste this code inside of it.
+The Windows command is fairly straight forward, it creates the appropriate files.
+#Writing and updating files
+## Open app/rxjs-operators.ts and paste this code inside of it.
 ```
 // Statics
 import 'rxjs/add/observable/throw';
@@ -63,9 +65,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 ```
-This code makes it easier on you when interacting with an API in angular 2
+This code makes it easier on you when interacting with an API in angular2
 
-2. Open app/app.module.ts and either add the additional code or paste this code in place of the current code.
+## Open app/app.module.ts and either add the additional code or paste this code in place of the current code.
 ```
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -88,7 +90,7 @@ export class AppModule { }
 ```
 The differences are the import of the FormsModule from the angular core and the HttpModule and JsonpModule from angular/http. In doing so, make sure they are also declared in your imports array.
 
-3. Open the newly created app/yummly-get.service.ts.
+## Open the newly created app/yummly-get.service.ts.
 At the top import all the necessary modules you will need. It will look like this
 ```
 import { Injectable }     from '@angular/core';
@@ -96,31 +98,33 @@ import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 ```
-Injectable enables us to use this service elsewhere in our code. Http, Response, Headers, and RequestOptions let us interact with API's and Observable makes handling API responses simpler.
+  Injectable enables us to use this service elsewhere in our code. Http, Response, Headers, and RequestOptions let us interact with API's and Observable makes handling API responses simpler.
 
 Start by telling angular that this is an injectable service. It should look like this.
 ```
 @Injectable
 ```
 
-Now we can write our service class, initalize it like so
+## Write the service class, and initialize it like so
 ```
 export class YummlyGetSerivce {
 
 }
 ```
-Inside the steps to making this service will be as such
-- create a private variable that contains the url of the API endpoint
+  Inside the YummlyGetSerivce class the steps to making this service will be as such
+
+## Create a private variable that contains the url of the API endpoint
 ```
 private url = 'https://api.yummly.com/v1/api/recipes?_app_id=ca33a09c&_app_key=458d12f8aa1a7682b4f947c7375a93dd&q=';
 ```
-the app id and app key at the end tell the api that we are authorized to makes requests
+  The app id and app key at the end tell the api that we are authorized to makes requests
 
-- declare an http constructor
+## Declare an http constructor
 ```
 constructor (private http: Http){}
 ```
-- add a method to the YummlyGetService class that retrieves recipes from the endpoint after taking a string argument
+
+## Add a method to the YummlyGetService class that retrieves recipes from the endpoint after taking a string argument
 ```
 getRecipes(string: String): Observable<Object[]> {
     return this.http.get(this.url + string + '&maxResult=10')
@@ -128,13 +132,14 @@ getRecipes(string: String): Observable<Object[]> {
                 .catch(this.handleError)
   }
 ```
-If you would like more information on what Observable is doing, you can go  [here](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md), for now just know it makes the API call much more manageable.
+  If you would like more information on what Observable is doing, you can go  [here](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md), for now just know it makes the API call much more manageable.
 
-The method takes the private url, adds on a string that will be passed through it in our app.component.ts file, and at the end concatenates a parameter that will cap our results at 10. The API then returns a large object filled with data in the response, it is then changed to json object, and shortened to just the array of matches. If you would like to experiment on your own, remove the .matches at the end of the res.json() for the whole json object.
+  This method takes the private url, adds on a string that will be passed through it in our app.component.ts file, and at the end concatenates a parameter that will cap our results at 10. The API then returns a large object filled with data in the response, which is then changed to a json object, and shortened to just the array of matches. If you would like to experiment on your own, remove the .matches at the end of the res.json() for the whole json object.
 
-[Here](https://developer.yummly.com/documentation#Metadata) is more information on all the data sent by the Yummly API
+  [Here](https://developer.yummly.com/documentation#Metadata) is more information on all the data sent by the Yummly API
 
-- a private method that will handle errors that otherwise might fail silently(not 100% necessary but good practice)
+## Add a private method that will handle errors that otherwise might fail silently(not 100% necessary but good practice)
+
 ```
 private handleError (error: Response | any) {
 
@@ -150,15 +155,16 @@ private handleError (error: Response | any) {
     return Observable.throw(errMsg);
   }
 ```
-4. Open the app/app.component.ts file
-- At the top of the file import these additional components
+
+## Open the app/app.component.ts file. At the top of the file import these additional components
 ```
 import { OnInit } from '@angular/core';
 import { YummlyGetService } from './yummly-get.service';
 import './rxjs-operators';
 ```
-OnInit lets is populate the page on startup, the yummlyGetService is the service we just created, and ./rxjs-operators is for our api call.
-- Next step is to modify the @Component so that we can see our data displayed on the page
+  OnInit lets is populate the page on startup, the yummlyGetService is the service we just created, and ./rxjs-operators is for our api call.
+
+## Modify the @Component so that we can see our data displayed on the page
 ```
 @Component({
   selector: 'my-app',
@@ -179,39 +185,45 @@ OnInit lets is populate the page on startup, the yummlyGetService is the service
 })
 ```
 Notice the change from Single quotation marks '',in the template, to back ticks. This lets us write our template in multiple lines rather than one long line.
-Other important steps to note are
-1. [(ngModel)] in the input tag, this is a way to create two way data-binding. When the input is changed by the user the excludeString will also be changed.
-2. (click) on the button tag tells angular that when this button is clicked run the expression declared inside the quotation marks "".
-3. \*ngFor tells angular that for every element in the recipes array, which has been declared as recipe, to make another list item with the appropriate information inside. Marked by the {{recipe.recipeName}} and {{recipe.ingredients}}.
-4. Lastly, we tell angular that in order for this code to work properly it will need the YummlyGetService in the providers array
+Other important steps to note are.
 
-- Lastly, modify the AppComponent Class. It will need to called differently than in the base example so we can utilize the OnInit component
+1. [(ngModel)] in the input tag, this is a way to create two way data-binding. When the input is changed by the user the excludeString will also be changed.
+
+2. (click) on the button tag tells angular that when this button is clicked run the expression declared inside the quotation marks "".
+
+3.  \*ngFor tells angular that for every element in the recipes array, which has been declared as recipe, to make another list item with the appropriate information inside. Marked by the {{recipe.recipeName}} and {{recipe.ingredients}}.
+
+4.  Tell angular that in order for this code to work properly it will need the YummlyGetService in the providers array.
+
+##Now, Modify the AppComponent Class. It will need to called differently than in the base example so we can utilize the OnInit component
 ```
 export class AppComponent implements OnInit {
 
 }
 ```
+
 Inside the AppComponent declare some attributes that will be used in the methods you'll create
 ```
 recipes: Object[];
 ingredients = [];
 excludeString = "";
 ```
-The recipes attribute is where our api call will store matches received from Yummly.
-The ingredients attribute will later be replaced by recipes.ingredients in one of our methods
-And the excludeString will be created by the user as they add ingredients they wish to be excluded from the returned recipes.
+  The recipes attribute is where our api call will store matches received from Yummly.
+  The ingredients attribute will later be replaced by recipes.ingredients in one of our methods
+  And the excludeString will be created by the user as they add ingredients they wish to be excluded from the returned recipes.
 
 This next line assists in our api call
 ```
 mode = 'Observable';
 ```
-Next construct the yummlyGetService so that it can be used
+
+## Construct the yummlyGetService so that it can be used
 ```
 constructor(private yummlyGetService: YummlyGetService) {}
 ```
 
-Finally we create four methods
-1. createExcludeString
+#Create Four Methods inside AppComponent
+## First Method createExcludeString
 ```
 createExcludeString(string: String) {
   let excludes = string.split(',');
@@ -226,7 +238,8 @@ createExcludeString(string: String) {
 }
 ```
 This takes the user input of ingredients they would like excluded, splits it into an array of the choices, and constructs the string based on how Yummly API requires its queries to be made. More information on the format [here](https://developer.yummly.com/documentation#Metadata).
-2. getRecipes
+
+## Second Method getRecipes
 ```
 getRecipes(str: string) {
   //assigns the input string to this.excludeString
@@ -240,20 +253,21 @@ getRecipes(str: string) {
 ```
 This is almost the same as the getRecipes from the yummly-get.service file. The extra code tells angular that the parameter string inside getRecipes should be the same as the excludeString and to use the yummlyGetService.getRecipes method and put the results in the previously created recipes array.
 
-3. formReset
+## Third Method formReset
 ```
 formReset() {
   this.excludeString = "";
 }
 ```
 when the user submits their excluded ingredients, getRecipes is called. At the end of getRecipes this function is used reset the excludeString so that another query can be made
-4. ngOnInit
+
+## Fourth Method ngOnInit
 ```
 ngOnInit() {
   this.getRecipes(this.excludeString);
 }
 ```
-this tells angular that when the app'ication is initially opened run this.getRecipes() so our page will have some recipes to show.
+this tells angular that when the application is initially opened run this.getRecipes() so our page will have some recipes to show.
 
 ##Final yummly-get.service.ts file and app.component.ts file
 This is how the yummly-get.service.ts file should look once completed.
@@ -355,3 +369,11 @@ export class AppComponent implements OnInit {
   }
 }
 ```
+
+#Viewing
+Once done the application should still be running in your browser. If not, either type
+```
+npm start
+```
+to start the application again
+Or refresh localhost:3000 in your browser
