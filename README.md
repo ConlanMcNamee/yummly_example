@@ -98,7 +98,7 @@ import { AppComponent } from './app.component';
 })
 export class AppModule { }
 ```
-The differences are the import of the FormsModule from the angular core and the HttpModule and JsonpModule from angular/http. In doing so, make sure they are also declared in your imports array.
+The differences are the import of the FormsModule from the angular core and the HttpModule and JsonpModule from angular/http. Be sure that these modules have also been declared in your imports array like above.
 
 ## Open the newly created app/yummly-get.service.ts.
 At the top import all the necessary modules you will need. It will look like this
