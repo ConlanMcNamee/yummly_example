@@ -31,13 +31,13 @@ If you would like to see the final product clone from the master branch [above](
 
 Using your selected IDE, open the folder containing the basic setup.
 
-In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitor it's changes through the TypeScript compiler watch mode.
-It will take a few minutes for npm install to finish
+In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitoring it's changes through the TypeScript compiler watch mode.
+*Note* It will take a few minutes for npm install to finish
 ```
 npm install
 npm start
 ```
-So now there should be a virtual server running in our command prompt, if a new page did not open in your browser you can view it by navigating to localhost:3000 in your browser of choice.
+So now there should be a server running in our command prompt, if a new page did not open in your browser you can view it by navigating to localhost:3000 in your browser of choice.
 
 #Creating the application
 If you cloned the final product you can test in in your web browser.
@@ -124,7 +124,7 @@ export class YummlyGetSerivce {
 ```
 private url = 'https://api.yummly.com/v1/api/recipes?_app_id=ca33a09c&_app_key=458d12f8aa1a7682b4f947c7375a93dd&q=';
 ```
-  The app id and app key at the end tell the api that we are authorized to makes requests
+  The app id and app key at the end tell the api that we are authorized to makes requests. If you get your own yummly keys you can replace these with your own.
 
 ## Declare an http constructor
 ```
@@ -141,7 +141,7 @@ getRecipes(string: String): Observable<Object[]> {
 ```
   If you would like more information on what Observable is doing, you can go  [here](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md), for now just know it makes the API call much more manageable.
 
-  This method takes the private url, adds on a string that will be passed through it in our app.component.ts file, and at the end concatenates a parameter that will cap our results at 10. The API then returns a large object filled with data in the response, which is then changed to a json object, and shortened to just the array of matches. If you would like to experiment on your own, remove the .matches at the end of the res.json() for the whole json object.
+  This method takes the private url, adds on a string that will be passed through it in our app.component.ts file, and at the end concatenates a parameter that will cap our results at 10. The API then returns a large object filled with data in the response, which is then changed to a json object, and shortened to just the array of matches. If you would like to experiment on your own, remove the .matches at the end of the res.json() to return the whole json object.
 
   [Here](https://developer.yummly.com/documentation#Metadata) is more information on all the data sent by the Yummly API
 
@@ -170,7 +170,7 @@ import { OnInit } from '@angular/core';
 import { YummlyGetService } from './yummly-get.service';
 import './rxjs-operators';
 ```
-  OnInit lets is populate the page on startup, the yummlyGetService is the service we just created, and ./rxjs-operators is for our api call.
+  OnInit lets the page be populated on startup, the yummlyGetService is the service we just created, and ./rxjs-operators is for our api call.
 
 ## Modify the @Component so that we can see our data displayed on the page
 ```
@@ -218,7 +218,7 @@ excludeString = "";
 ```
   The recipes attribute is where our api call will store matches received from Yummly.
   The ingredients attribute will later be replaced by recipes.ingredients in one of our methods
-  And the excludeString will be created by the user as they add ingredients they wish to be excluded from the returned recipes.
+  The excludeString will be created by the user as they add ingredients they wish to be excluded from the returned recipes.
 
 This next line assists in our api call
 ```
@@ -238,6 +238,7 @@ createExcludeString(string: String) {
   let returnString = "";
   for (var prop in excludes) {
     if(excludes[prop] !== '') {
+      //grab the array item, make it lowercase for simplicity, remove blank spaces, and replace spaces with %20
       var temp = excludes[prop].toLowerCase().trim().replace(' ', '%20');
       returnString = returnString + '&excludedIngredient[]=' + temp;
     }
@@ -245,7 +246,7 @@ createExcludeString(string: String) {
   return returnString;
 }
 ```
-This takes the user input of ingredients they would like excluded, splits it into an array of the choices, and constructs the string based on how Yummly API requires its queries to be made. More information on the format [here](https://developer.yummly.com/documentation#Metadata).
+This takes the user input of ingredients they would like excluded, splits it into an array of the choices, and constructs the string based on how Yummly API requires its queries to be made.Each ingredient not be included in the returned recipes must have the string &excludedIngredient[]= preceding the item.If there are spaces in an item, such as 'chicken soup', the space needs to be replaced by the string %20. More information on the format [here](https://developer.yummly.com/documentation#Metadata).
 
 ## Second Method getRecipes
 ```
@@ -363,8 +364,6 @@ export class AppComponent implements OnInit {
   getRecipes(str: string) {
     this.excludeString = str;
     this.yummlyGetService.getRecipes(this.excludeString).subscribe(recipes => this.recipes = recipes);
-
-    //reset the form once all the data has been placed in our html file
     this.formReset();
   }
 
@@ -405,8 +404,6 @@ export class AppComponent implements OnInit {
   getRecipes(str: string) {
     this.excludeString = str;
     this.yummlyGetService.getRecipes(this.excludeString).subscribe(recipes => this.recipes = recipes);
-
-    //reset the form once all the data has been placed in our html file
     this.formReset();
   }
 
