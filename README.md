@@ -27,11 +27,11 @@ It is recommended to start with this example, if you wish to start with the base
 ##Building the application
 Download or clone the basic setup [here](https://github.com/ConlanMcNamee/yummly_example/tree/setup)
 
-If you would like to see the final product clone from the master branch [above](https://github.com/ConlanMcNamee/yummly_example/tree/master).
+If you would like to see the final product; clone or copy from the master branch [above](https://github.com/ConlanMcNamee/yummly_example/tree/master).
 
 Using your selected IDE, open the folder containing the basic setup.
 
-In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitoring it's changes through the TypeScript compiler watch mode.
+In the command prompt, run these commands in the root directory. The first command will install the dependencies required to run this application from the package.json file. The second command will open an instance of our basic application in your browser through lite-server, which is serving up our index.html file, and monitoring it's changes through the TypeScript compiler watch mode.
 *Note* It will take a few minutes for npm install to finish
 ```
 npm install
