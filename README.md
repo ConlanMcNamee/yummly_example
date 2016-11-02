@@ -44,9 +44,11 @@ If you cloned the final product, you can test the application in your web browse
 
 If you cloned the basic; setup below are the steps for making this application.
 ## Adding files
-Open another command prompt without closing the one running our lite-server. You will need need two new files for this application in our app folder.  
+Open another command prompt without closing the one running our lite-server. In the app folder, you will need to make two new files.
+
 1. rxjs-operators.ts
 2. yummly-get.service.ts
+
 In a Mac Terminal type
 ```
 touch app/rxjs-operators.ts app/yummly-get.service.ts
