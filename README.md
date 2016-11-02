@@ -49,12 +49,13 @@ Open another command prompt without closing the one running our lite-server. In 
 1. rxjs-operators.ts
 2. yummly-get.service.ts
 
-In a Mac Terminal type
+In a Mac Terminal type this one command
 ```
 touch app/rxjs-operators.ts app/yummly-get.service.ts
 ```
 First thing to note is to stay in the root directory. Secondly touch will create a file if it does not exist and will not overwrite a file is already exists.
-In a Windows Terminal, type
+
+In a Windows Terminal, type these two commands
 ```
 Create app/rxjs-operators.ts
 Create app/yummly-get.service.ts
