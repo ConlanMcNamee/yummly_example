@@ -127,7 +127,7 @@ export class YummlyGetSerivce {
 ```
 private url = 'https://api.yummly.com/v1/api/recipes?_app_id=ca33a09c&_app_key=458d12f8aa1a7682b4f947c7375a93dd&q=';
 ```
-  The app id and app key at the end tell the api that we are authorized to makes requests. If you get your own yummly keys you can replace these with your own.
+  The app id and app key at the end tell the api that we are authorized to makes requests. If have your own yummly keys you can write those in place of these keys.
 
 ## Declare an http constructor
 ```
