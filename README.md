@@ -377,11 +377,83 @@ export class AppComponent implements OnInit {
   }
 }
 ```
+#Classes In-depth look
+
+## AppComponent Class
+```
+export class AppComponent implements OnInit {
+  recipes: Object[];
+  ingredients = [];
+  excludeString = "";
+
+  mode = 'Observable';
+
+  constructor(private yummlyGetService: YummlyGetService) {}
+
+  createExcludeString(string: String) {
+    let excludes = string.split(',');
+    let returnString = "";
+    for (var prop in excludes) {
+      if(excludes[prop] !== '') {
+        var temp = excludes[prop].toLowerCase().trim().replace(' ', '%20');
+        returnString = returnString + '&excludedIngredient[]=' + temp;
+      }
+    }
+    return returnString;
+  }
+
+  getRecipes(str: string) {
+    this.excludeString = str;
+    this.yummlyGetService.getRecipes(this.excludeString).subscribe(recipes => this.recipes = recipes);
+
+    //reset the form once all the data has been placed in our html file
+    this.formReset();
+  }
+
+  formReset() {
+    this.excludeString = "";
+  }
+
+  ngOnInit() {
+    this.getRecipes(this.excludeString);
+  }
+}
+```
+## Yummly Get Service Class
+```
+export class YummlyGetService {
+  private url = 'https://api.yummly.com/v1/api/recipes?_app_id=ca33a09c&_app_key=458d12f8aa1a7682b4f947c7375a93dd&q=';
+
+  constructor (private http: Http){}
+
+  getRecipes(string: String): Observable<Object[]> {
+    return this.http.get(this.url + string + '&maxResult=10')
+                .map((res: Response) => res.json().matches)
+                .catch(this.handleError)
+  }
+
+  private handleError (error: Response | any) {
+
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
+
+}
+```
+
 
 #Viewing
 Once done the application should still be running in your browser. If not, either type
 ```
 npm start
 ```
-to start the application again
+to start the application again.
 Or refresh localhost:3000 in your browser
