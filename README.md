@@ -249,7 +249,7 @@ createExcludeString(string: String) {
   return returnString;
 }
 ```
-This takes the user input of ingredients they would like excluded, splits it into an array of the choices, and constructs the string based on how Yummly API requires its queries to be made.Each ingredient not be included in the returned recipes must have the string &excludedIngredient[]= preceding the item.If there are spaces in an item, such as 'chicken soup', the space needs to be replaced by the string %20. More information on the format [here](https://developer.yummly.com/documentation#Metadata).
+This takes the user input of ingredients they would like excluded, splits it into an array of the choices, and constructs the string based on how Yummly API requires its queries to be made. Each ingredient not be included in the returned recipes must have the string &excludedIngredient[]= preceding the item. If there are spaces in an item, such as 'chicken soup', the space needs to be replaced by the string %20. More information on the format [here](https://developer.yummly.com/documentation#Metadata).
 
 ## Second Method getRecipes
 ```
